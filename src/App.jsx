@@ -1,53 +1,25 @@
 import { useState } from 'react'
 import './App.css'
+// import { CONTENT_INFO } from '../public/assets/data/content'
+import Header from './components/Header'
+import Content from './components/Content'
+import Footer from './components/Footer'
+import Menu from './components/Menu'
+
 
 function App() {
+	// const [count, setCount] = useState(0)
+	const [isOpen,setOpen] = useState(false)//🧭控制侧导航的开启与关闭
+	const [menuName, setMenuName] = useState('island')//控制左侧显示什么视频
 
-	//🧭控制侧导航的开启与关闭
-	const [isOpen,setOpen] = useState(false)
-
-  	const [count, setCount] = useState(0)
-
-	
 	return (
 	<div className="App">
 		{/* 🔥🔥根据是否 open 来判断要显示哪个类名！！ 👇*/}
 		<section className={isOpen ? "main-structure active" : "main-structure"}>
-			<header>
-				<a href="#">
-					<div className="logo">Travel</div>
-				</a>
-				{/* 顶部更多菜单,🔥点击后取反 */}
-				<div className="menu-logo" onClick={()=>{setOpen(!isOpen)}}></div>
-			</header>
-			<div className="content">
-					{/* 自动播放视频 autoPlay */}
-					<video className="active" src="/public/assets/videos/Island.mp4" autoPlay muted loop></video>
-					<video  src="/public/assets/videos/spring.mp4" autoPlay muted loop></video>
-					<video  src="/public/assets/videos/summer.mp4" autoPlay muted loop></video>
-					<video  src="/public/assets/videos/autumn.mp4" autoPlay muted loop></video>
-					<video  src="/public/assets/videos/winter.mp4" autoPlay muted loop></video>
-				<div className="video-overlay"></div>
-				<section className="text-description">
-					<h1></h1>
-					<h2></h2>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis delectus dolores sunt minima id dolorum placeat nemo atque, porro accusamus tempora praesentium! In modi voluptate magni laboriosam est, eveniet molestiae!</p>
-					<a href="#"></a>
-				</section>
-			</div>
-			<footer>
-				<a href="#"><img src="/assets/icons/facebook.svg" alt="facebook"/></a>
-				<a href="#"><img src="/assets/icons/instagram.svg" alt="instagram"/></a>
-				<a href="#"><img src="/assets/icons/twitter.svg" alt="twitter"/></a>
-			</footer>
-
-		</section>
-		<section className="aside-menu">
-			<a href="#">Island</a>
-			<a href="#">Spring</a>
-			<a href="#">Summer</a>
-			<a href="#">Autumn</a>
-			<a href="#">Winter</a>
+			<Header isOpen={isOpen} setOpen={setOpen}/>
+			<Content menuName={menuName}/>
+			<Footer />
+			<Menu setMenuName={setMenuName}/>{/*🌟props 可以传递方法！把 setMenuName 的这个方法传作为属性递给 Menu 组件！*/}
 		</section>
 	</div>
 	)
